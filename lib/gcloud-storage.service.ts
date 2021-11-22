@@ -73,4 +73,17 @@ export class GCloudStorageService {
     }
     return 'https://storage.googleapis.com/' + join(perRequestOptions.defaultBucketname, filename);
   }
+
+  listFile = async (bucket = this.options.defaultBucketname) => {
+    const [files] = await this.storage.bucket(bucket).getFiles();
+    return files;
+  }
+
+  delete = async (fileName, bucket = this.options.defaultBucketname) => {
+    return this.storage.bucket(bucket).file(fileName).delete();
+  }
+
+  exists = async (fileName, bucket = this.options.defaultBucketname) => {
+    return this.storage.bucket(bucket).file(fileName).exists();
+  }
 }
