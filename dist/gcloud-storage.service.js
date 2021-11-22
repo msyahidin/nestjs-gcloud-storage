@@ -34,6 +34,16 @@ let GCloudStorageService = GCloudStorageService_1 = class GCloudStorageService {
         this.logger = new common_1.Logger(GCloudStorageService_1.name);
         this.storage = new storage_1.Storage();
         this.bucket = null;
+        this.listFile = (bucket = this.options.defaultBucketname) => __awaiter(this, void 0, void 0, function* () {
+            const [files] = yield this.storage.bucket(bucket).getFiles();
+            return files;
+        });
+        this.delete = (fileName, bucket = this.options.defaultBucketname) => __awaiter(this, void 0, void 0, function* () {
+            return this.storage.bucket(bucket).file(fileName).delete();
+        });
+        this.exists = (fileName, bucket = this.options.defaultBucketname) => __awaiter(this, void 0, void 0, function* () {
+            return this.storage.bucket(bucket).file(fileName).exists();
+        });
         this.logger.log(`GCloudStorageService.options ${options}`);
         const bucketName = this.options.defaultBucketname;
         this.bucket = this.storage.bucket(bucketName);

@@ -18,4 +18,7 @@ export declare class GCloudStorageService {
     constructor(options: GCloudStorageOptions);
     upload(fileMetadata: UploadedFileMetadata, perRequestOptions?: Partial<GCloudStoragePerRequestOptions>): Promise<string>;
     getStorageUrl(filename: string, perRequestOptions?: Partial<GCloudStoragePerRequestOptions>): string;
+    listFile: (bucket?: string) => Promise<import("@google-cloud/storage/build/src/file").File[]>;
+    delete: (fileName: any, bucket?: string) => Promise<[import("teeny-request").Response<any>]>;
+    exists: (fileName: any, bucket?: string) => Promise<[boolean]>;
 }
